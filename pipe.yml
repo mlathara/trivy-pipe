@@ -1,7 +1,7 @@
 name: Aqua Security Trivy
 description: Scans container images for vulnerabilities with Trivy
 
-image: aquasec/trivy-pipe:latest
+image: omicsautomation.azurecr.io/trivy-pipe:0.22.0
 category: Security
 
 variables:
@@ -68,6 +68,14 @@ variables:
     description: 'hide progress output'
     required: false
     default: true
+  - name: githubToken
+    description: 'github token to auth when downloading db'
+    required: false
+    default: ''
+  - name: debug
+    description: 'enable debug output'
+    required: false
+    default: ''
 
 respository: https://github.com/aquasecurity/trivy-pipe
 maintainer: 

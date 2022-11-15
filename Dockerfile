@@ -1,9 +1,7 @@
-FROM aquasec/trivy:0.20.2
+FROM aquasec/trivy:0.22.0
 
 COPY pipe /
 
-RUN apk --no-cache add bash
-
-RUN chmod +x /pipe.sh
+RUN apk --no-cache add bash && chmod +x /pipe.sh
 
 ENTRYPOINT ["/pipe.sh"]

@@ -194,6 +194,8 @@ Following inputs can be used as `step.with` keys:
 | `cacheDir`      | String  |                                    | Cache directory                               |
 | `timeout`        | String  | `2m0s`                             | Scan timeout duration                         |
 | `ignorePolicy`  | String  |                                    | Filter vulnerabilities with OPA rego language |
+| `githubToken`  | String  |                                    | Github Token to authenticate when downloading db |
+| `debug`        | String  |                                    | Enable debug output                            |
 
 
 [license]: https://github.com/aquasecurity/trivy-pipe/blob/master/LICENSE

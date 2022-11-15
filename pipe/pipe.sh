@@ -4,7 +4,7 @@ set -e
 
 scanType=$(echo $scanType | tr -d '\r')
 export artifactRef="${imageRef}"
-if [ "${scanType}" = "fs" ] ||  [ "${scanType}" = "config" ];then
+if [ "${scanType}" = "fs" ] ||  [ "${scanType}" = "config" ] || [ "${scanType}" = "rootfs" ]; then
   artifactRef=$BITBUCKET_CLONE_DIR
 fi
 input=$(echo $input | tr -d '\r')
@@ -17,6 +17,9 @@ hideProgress=$(echo $hideProgress | tr -d '\r')
 GLOBAL_ARGS=""
 if [ $cacheDir ];then
   GLOBAL_ARGS="$GLOBAL_ARGS --cache-dir $cacheDir"
+fi
+if [ $debug ]; then
+  GLOBAL_ARGS="$GLOBAL_ARGS --debug"
 fi
 
 SARIF_ARGS=""
@@ -61,6 +64,7 @@ fi
 if [ "$hideProgress" == "true" ];then
   ARGS="$ARGS --no-progress"
 fi
+export GITHUB_TOKEN=$githubToken
 
 echo "Running trivy with options: ${ARGS}" "${artifactRef}"
 echo "Global options: " "${GLOBAL_ARGS}"
