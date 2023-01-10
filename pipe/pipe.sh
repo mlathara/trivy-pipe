@@ -3,6 +3,9 @@
 set -e
 
 scanType=$(echo $scanType | tr -d '\r')
+if [[ -z "$scanType" ]]; then
+  scanType="image"
+fi
 export artifactRef="${imageRef}"
 if [ "${scanType}" = "fs" ] ||  [ "${scanType}" = "config" ] || [ "${scanType}" = "rootfs" ]; then
   artifactRef=$BITBUCKET_CLONE_DIR
@@ -68,6 +71,7 @@ export GITHUB_TOKEN=$githubToken
 
 echo "Running trivy with options: ${ARGS}" "${artifactRef}"
 echo "Global options: " "${GLOBAL_ARGS}"
+echo trivy $GLOBAL_ARGS ${scanType} $ARGS ${artifactRef} 
 trivy $GLOBAL_ARGS ${scanType} $ARGS ${artifactRef} 
 returnCode=$?
 
